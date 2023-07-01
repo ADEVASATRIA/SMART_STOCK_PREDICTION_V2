@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,5 +45,17 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
     
+
+
+    Route::controller(CustomerController::class)->prefix('customers')->group(function () {
+        Route::get('', 'index')->name('customers');
+        Route::get('create', 'create')->name('customers.create');
+        Route::post('store', 'store')->name('customers.store');
+        Route::get('show/{id}', 'show')->name('customers.show');
+        Route::get('edit/{id}', 'edit')->name('customers.edit');
+        Route::put('edit/{id}', 'update')->name('customers.update');
+        Route::delete('destroy/{id}', 'destroy')->name('customers.destroy');
+    });
+
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
 });
