@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\CategoryProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//ROUETE YANG DIGUNAKAN SEBAGAI LOGIN,REGISTER, DAN ETC
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
@@ -29,7 +31,8 @@ Route::controller(AuthController::class)->group(function () {
     
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
-    
+
+//ROUTE  YANG DIGUNAKAN SEBAGAI DILAKUKANNYA SEMUA CRUD OLEH ADMIN     
 Route::middleware('auth')->group(function () {
     Route::get('dashboard', function () {
         return view('dashboard');
@@ -55,6 +58,16 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('customers.edit');
         Route::put('edit/{id}', 'update')->name('customers.update');
         Route::delete('destroy/{id}', 'destroy')->name('customers.destroy');
+    });
+
+    Route::controller(CategoryProductController::class)->prefix('categoryproduct')->group(function () {
+        Route::get('', 'index')->name('categoryproduct');
+        Route::get('create', 'create')->name('categoryproduct.create');
+        Route::post('store', 'store')->name('categoryproduct.store');
+        Route::get('show/{id}', 'show')->name('categoryproduct.show');
+        Route::get('edit/{id}', 'edit')->name('categoryproduct.edit');
+        Route::put('edit/{id}', 'update')->name('categoryproduct.update');
+        Route::delete('destroy/{id}', 'destroy')->name('categoryproduct.destroy');
     });
 
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
