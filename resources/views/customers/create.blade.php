@@ -11,16 +11,10 @@
             <div class="col">
                 <input type="text" name="name" class="form-control" placeholder="name">
             </div>
-            <div class="col">
-                <input type="text" name="email" class="form-control" placeholder="email">
-            </div>
         </div>
         <div class="row mb-3">
             <div class="col">
                 <input type="text" name="phone_number" class="form-control" placeholder="phone_number">
-            </div>
-            <div class="col">
-                <input type="text" name="user_id" class="form-control" placeholder="user_id">
             </div>
         </div>
  

@@ -35,7 +35,6 @@ class CustomerController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            'email' => 'required|email|unique:customers,email',
             'phone_number' => 'required',
         ]);
 
@@ -48,9 +47,7 @@ class CustomerController extends Controller
 
         $customer = Customer::create([
             'name' => $request->name,
-            'email' => $request->email,
             'phone_number' => $request->phone_number,
-            'user_id' => Auth::user()->id,
         ]);
 
         return response()->json([

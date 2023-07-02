@@ -35,6 +35,12 @@
         <i class="fas fa-fw fa-tachometer-alt"></i>
         <span>Category Product</span></a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('transaction') }}">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Transaction</span></a>
+    </li>
     
     <li class="nav-item">
         <a class="nav-link" href="/profile">

@@ -10,19 +10,11 @@
             <label class="form-label">name</label>
             <input type="text" name="name" class="form-control" placeholder="name" value="{{ $customer->name }}" readonly>
         </div>
-        <div class="col mb-3">
-            <label class="form-label">Email</label>
-            <input type="text" name="Email" class="form-control" placeholder="Email" value="{{ $customer->Email }}" readonly>
-        </div>
     </div>
     <div class="row">
         <div class="col mb-3">
             <label class="form-label">Phone_number</label>
             <input type="text" name="Phone_number" class="form-control" placeholder="Phone_number" value="{{ $customer->Phone_number }}" readonly>
-        </div>
-        <div class="col mb-3">
-            <label class="form-label">user_id</label>
-            <input type="text" name="user_id" class="form-control" placeholder="user_id" value="{{ $customer->user_id }}" readonly>
         </div>
     </div>
     <div class="row">

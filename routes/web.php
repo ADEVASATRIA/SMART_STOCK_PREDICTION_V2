@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoryProductController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -68,6 +69,16 @@ Route::middleware('auth')->group(function () {
         Route::get('edit/{id}', 'edit')->name('categoryproduct.edit');
         Route::put('edit/{id}', 'update')->name('categoryproduct.update');
         Route::delete('destroy/{id}', 'destroy')->name('categoryproduct.destroy');
+    });
+
+    Route::controller(TransactionController::class)->prefix('transaction')->group(function () {
+        Route::get('', 'index')->name('transaction');
+        Route::get('create', 'create')->name('transaction.create');
+        Route::post('store', 'store')->name('transaction.store');
+        Route::get('show/{id}', 'show')->name('transaction.show');
+        Route::get('edit/{id}', 'edit')->name('transaction.edit');
+        Route::put('edit/{id}', 'update')->name('transaction.update');
+        Route::delete('destroy/{id}', 'destroy')->name('transaction.destroy');
     });
 
     Route::get('/profile', [App\Http\Controllers\AuthController::class, 'profile'])->name('profile');

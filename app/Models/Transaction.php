@@ -5,17 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Customer extends Model
+class Transaction extends Model
 {
     use HasFactory;
-
+    protected $table = "transaction";
     protected $fillable = [
-        'name',
-        'phone_number',
+        'name_customer',
+        'name_product',
+        'total'
     ];
 
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
 }
