@@ -23,6 +23,10 @@
                 <label class="form-label">Phone number</label>
                 <input type="text" name="phone_number" class="form-control" placeholder="phone_number Code" value="{{ $customer->phone_number }}" >
             </div>
+            <div class="col mb-3">
+                <label class="form-label">User id</label>
+                <input type="text" name="user_id" class="form-control" placeholder="user_id" value="{{ $customer->user_id }}" >
+            </div>
         </div>
         <div class="row">
             <div class="d-grid">

@@ -19,6 +19,9 @@
             <div class="col">
                 <input type="text" name="phone_number" class="form-control" placeholder="phone_number">
             </div>
+            <div class="col">
+                <input type="text" name="user_id" class="form-control" placeholder="user_id">
+            </div>
         </div>
  
         <div class="row">

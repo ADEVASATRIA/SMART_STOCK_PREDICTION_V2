@@ -20,6 +20,7 @@
                 <th>name</th>
                 <th>email</th>
                 <th>phone number</th>
+                <th>user id</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -31,6 +32,7 @@
                         <td class="align-middle">{{ $rs->name }}</td>
                         <td class="align-middle">{{ $rs->email }}</td>
                         <td class="align-middle">{{ $rs->phone_number }}</td>
+                        <td class="align-middle">{{ $rs->user_id }}</td>
                         <td class="align-middle">
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a href="{{ route('customers.show', $rs->id) }}" type="button" class="btn btn-secondary">Detail</a>

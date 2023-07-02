@@ -9,18 +9,18 @@
         @csrf
         <div class="row mb-3">
             <div class="col">
-                <input type="text" name="title" class="form-control" placeholder="Title">
+                <input type="text" name="name" class="form-control" placeholder="name">
             </div>
             <div class="col">
-                <input type="text" name="price" class="form-control" placeholder="Price">
+                <input type="text" name="price" class="form-control" placeholder="price">
             </div>
         </div>
         <div class="row mb-3">
             <div class="col">
-                <input type="text" name="product_code" class="form-control" placeholder="Product Code">
+                <input type="text" name="stock" class="form-control" placeholder="Product stock">
             </div>
             <div class="col">
-                <textarea class="form-control" name="description" placeholder="Descriptoin"></textarea>
+                <input type="text" name="category_id" class="form-control" placeholder="category_id">
             </div>
         </div>
  

@@ -10,22 +10,22 @@
         @method('PUT')
         <div class="row">
             <div class="col mb-3">
-                <label class="form-label">Title</label>
-                <input type="text" name="title" class="form-control" placeholder="Title" value="{{ $product->title }}" >
+                <label class="form-label">name</label>
+                <input type="text" name="name" class="form-control" placeholder="name" value="{{ $product->name }}" >
             </div>
             <div class="col mb-3">
-                <label class="form-label">Price</label>
-                <input type="text" name="price" class="form-control" placeholder="Price" value="{{ $product->price }}" >
+                <label class="form-label">price</label>
+                <input type="text" name="price" class="form-control" placeholder="price" value="{{ $product->price }}" >
             </div>
         </div>
         <div class="row">
             <div class="col mb-3">
-                <label class="form-label">Product Code</label>
-                <input type="text" name="product_code" class="form-control" placeholder="Product Code" value="{{ $product->product_code }}" >
+                <label class="form-label">stock</label>
+                <input type="text" name="stock" class="form-control" placeholder="stock" value="{{ $product->stock }}" >
             </div>
             <div class="col mb-3">
-                <label class="form-label">Description</label>
-                <textarea class="form-control" name="description" placeholder="Descriptoin" >{{ $product->description }}</textarea>
+                <label class="form-label">category_id</label>
+                <input type="text" name="category_id" class="form-control" placeholder="category_id" value="{{ $product->category_id }}" >
             </div>
         </div>
         <div class="row">
