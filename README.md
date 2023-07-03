@@ -1,6 +1,7 @@
 ![THUMNAIL ](https://github.com/syauqqii/SMART_STOCK_PREDICTION_V2/blob/master/Tambahan/smartstockpredictions.png)
+<-- description here -->
 
-## ERD
+## Entity Relationship Diagram
 <img src="https://github.com/syauqqii/SMART_STOCK_PREDICTION_V2/blob/master/Tambahan/Screenshot%20(973).png">
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
