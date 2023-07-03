@@ -1,31 +1,21 @@
 <?php
 
-namespace App\Http\Controllers\API;
+namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\API\AuthController;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 use App\Models\Customer;
 
 class CustomerController extends Controller
 {
-    public function __construct()
-    {
-        $this->authController = new AuthController();
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $customers = Customer::where('user_id', Auth::user()->id)->get();
+        $customers = Customer::all();
 
-        return response()->json([
-            'success' => true,
-            'data' => $customers
-        ]);
+        return response()->json(["Customers" => $customers]);
     }
 
     /**
@@ -33,106 +23,80 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'phone_number' => 'required',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'phone_number' => 'required|unique:customers',
+            ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
+            $customers = Customer::create($validatedData);
+
+            return response()->json($customers, 201);
+        } catch (ValidationException $exception) {
+            return response()->json(['message' => $exception->errors()], 400);
         }
-
-        $customer = Customer::create([
-            'name' => $request->name,
-            'phone_number' => $request->phone_number,
-        ]);
-
-        return response()->json([
-            'success' => true,
-            'data' => $customer
-        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Customer $customer)
+    public function show(string $id)
     {
-        if ($customer->user_id !== Auth::user()->id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Customer not found'
-            ], 404);
+        $customers = Customer::find($id);
+
+        if (!$customers) {
+            return response()->json(['message' => 'Customer not found'], 404);
         }
 
-        return response()->json([
-            'success' => true,
-            'data' => $customer
-        ]);
+        return response()->json($customers);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, string $id)
     {
-        $customer = Customer::find($id);
+        try {
+            if (!$id) {
+                return response()->json(['message' => 'ID not provided'], 400);
+            }
 
-        if (!$customer) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Customer not found'
-            ], 404);
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'phone_number' => 'required|unique:customers,phone_number,' . $id,
+            ]);
+
+            $customers = Customer::find($id);
+
+            if (!$customers) {
+                return response()->json(['message' => 'Customer not found'], 404);
+            }
+
+            $customers->update($validatedData);
+
+            return response()->json($customers);
+        } catch (ValidationException $exception) {
+            return response()->json(['message' => $exception->errors()], 400);
         }
-
-        if ($customer->user_id !== Auth::user()->id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Unauthorized'
-            ], 401);
-        }
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|string',
-            'email' => 'required|email|unique:customers,email,' . $customer->id,
-            'phone_number' => 'required',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'errors' => $validator->errors()
-            ], 422);
-        }
-
-        $customer->update($request->all());
-
-        return response()->json([
-            'success' => true,
-            'data' => $customer
-        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Customer $customer)
+    public function destroy(string $id)
     {
-        if ($customer->user_id !== Auth::user()->id) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Customer not found'
-            ], 404);
+        if (!$id) {
+            return response()->json(['message' => 'ID not provided'], 400);
         }
 
-        $customer->delete();
+        $customers = Customer::find($id);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Customer deleted successfully'
-        ]);
+        if (!$customers) {
+            return response()->json(['message' => 'Customer not found'], 404);
+        }
+        
+        $customers->delete();
+
+        return response()->json(['message' => 'Customer deleted']);
     }
 }

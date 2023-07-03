@@ -5,7 +5,7 @@
 @section('contents')
     <h1 class="mb-0">Edit Category Product</h1>
     <hr />
-    <form action="{{ route('categoryproduct.update', $categoryproduct->id_category_product) }}" method="POST">
+    <form action="{{ route('categoryproduct.update', $categoryproduct->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="row">
@@ -20,4 +20,9 @@
             </div>
         </div>
     </form>
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
 @endsection

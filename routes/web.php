@@ -2,10 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\CategoryProductController;
-use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\WEB\ProductController;
+use App\Http\Controllers\WEB\CustomerController;
+use App\Http\Controllers\WEB\CategoryProductController;
+use App\Http\Controllers\WEB\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +18,14 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [AuthController::class, 'login']);
 
 //ROUETE YANG DIGUNAKAN SEBAGAI LOGIN,REGISTER, DAN ETC
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
     Route::post('register', 'registerSave')->name('register.save');
-    
     Route::get('login', 'login')->name('login');
     Route::post('login', 'loginAction')->name('login.action');
-    
     Route::get('logout', 'logout')->middleware('auth')->name('logout');
 });
 
@@ -48,8 +44,6 @@ Route::middleware('auth')->group(function () {
         Route::put('edit/{id}', 'update')->name('products.update');
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
-    
-
 
     Route::controller(CustomerController::class)->prefix('customers')->group(function () {
         Route::get('', 'index')->name('customers');

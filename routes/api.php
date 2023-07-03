@@ -2,46 +2,45 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\API\AuthController;
+use App\Http\Controllers\API\LoginController;
+use App\Http\Controllers\API\LogOutController;
 use App\Http\Controllers\API\CustomerController;
+use App\Http\Controllers\API\CategoryProductController;
+use App\Http\Controllers\API\ProductController;
+use App\Http\Controllers\API\TransactionController;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "api" middleware group. Make something great!
-|
-*/
+// Login
+Route::post('/login', LoginController::class)->name('login');
 
-//ROUTE YANG DIGUNAKAN UNTUK PROSES LOGIN,REGISTER,LOGOUT, DLL
-Route::post('register', [AuthController::class, 'register']);
-Route::post('login', [AuthController::class, 'login'])->name('login');
-Route::group(['middleware' => 'auth:api'], function () {
-    Route::get('me', [AuthController::class, 'me']);
-    Route::post('logout', [AuthController::class, 'logout']);
-    Route::post('refresh', [AuthController::class, 'refresh']);
-    Route::get('users', [AuthController::class, 'index']);
-    Route::delete('users/{id}', [AuthController::class, 'destroy']);
-});
-// Route::group([
-//     'middleware' => 'api',
-//     'prefix' => 'auth'
-// ], function ($router) {
-//     Route::post('/login', [AuthController::class, 'login']);
-//     Route::post('/register', [AuthController::class, 'register']);
-//     Route::post('/logout', [AuthController::class, 'logout']);
-//     Route::post('/refresh', [AuthController::class, 'refresh']);
-//     Route::get('/user-profile', [AuthController::class, 'userProfile']);    
-// });
+Route::group(['middleware' => ['auth:api']], function () {
+    // Customer (Master Table)
+    Route::get('/customer', [CustomerController::class, 'index'])->name('customers.index');
+    Route::post('/customer', [CustomerController::class, 'store'])->name('customers.store');
+    Route::get('/customer/{id}', [CustomerController::class, 'show'])->name('customers.show');
+    Route::post('/customer/{id}', [CustomerController::class, 'update'])->name('customers.update');
+    Route::delete('/customer/{id}', [CustomerController::class, 'destroy'])->name('customers.destroy');
 
-//ROUTE YANG DIGUNAKAN UNTUK MELAKUKAN CRUD DATA CUSTOMERS [ADMIN]
-Route::group(['middleware' => 'auth:api', 'prefix' => 'admin'], function () {
-    Route::get('/customers', [CustomerController::class, 'index']);
-    Route::post('/customers', [CustomerController::class, 'store']);
-    Route::get('/customers/{customer}', [CustomerController::class, 'show']);
-    Route::put('/customers/{customer}', [CustomerController::class, 'update']);
-    Route::delete('/customers/{customer}', [CustomerController::class, 'destroy']);
+    // Category Product (Master Table)
+    Route::get('/category-product', [CategoryProductController::class, 'index'])->name('kategori-produk.index');
+    Route::post('/category-product', [CategoryProductController::class, 'store'])->name('kategori-produk.store');
+    Route::get('/category-product/{id}', [CategoryProductController::class, 'show'])->name('kategori-produk.show');
+    Route::post('/category-product/{id}', [CategoryProductController::class, 'update'])->name('kategori-produk.update');
+    Route::delete('/category-product/{id}', [CategoryProductController::class, 'destroy'])->name('kategori-produk.destroy');
+
+    // Product
+    Route::get('/product', [ProductController::class, 'index'])->name('product.index');
+    Route::post('/product', [ProductController::class, 'store'])->name('product.store');
+    Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.show');
+    Route::post('/product/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('/product/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+
+    // Transaction
+    Route::get('/transactions', [TransactionController::class, 'index'])->name('transactions.index');
+    Route::post('/transactions', [TransactionController::class, 'store'])->name('transactions.store');
+    Route::get('/transactions/{id}', [TransactionController::class, 'show'])->name('transactions.show');
+    Route::post('/transactions/{id}', [TransactionController::class, 'update'])->name('transactions.update');
+    Route::delete('/transactions/{id}', [TransactionController::class, 'destroy'])->name('transactions.destroy');
+
+    // Logout
+    Route::post('/logout', LogOutController::class)->name('logout');
 });

@@ -14,8 +14,8 @@ class Customer extends Model
         'phone_number',
     ];
 
-    public function user()
+    public function transactions()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasMany(Transaction::class, 'id_customer', 'id');
     }
 }

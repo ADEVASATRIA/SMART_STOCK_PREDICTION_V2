@@ -1,6 +1,6 @@
 @extends('layouts.app')
     
-    @section('title', 'Selamat datang di dashboard Admin - Smart Stock Prediction')
+    @section('title', 'ADMIN - Smart Stock Management')
     
     @section('contents')
     <div class="row">
