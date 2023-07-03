@@ -11,9 +11,9 @@ Dengan menggabungkan backend yang kuat dari Laravel, front end yang dioptimalkan
 <img src="https://github.com/syauqqii/SMART_STOCK_PREDICTION_V2/blob/master/Tambahan/Screenshot%20(973).png">
 
 ## KELOMPOK
-- Adeva Satria Arif Wibawa        2502012464
-- Dimas Syauqi Syafa              2502004405
-- Kenneth Ezekiel Sunardibuana    2501999854
+- Adeva Satria Arif Wibawa        [ 2502012464 ]
+- Dimas Syauqi Syafa              [ 2502004405 ]
+- Kenneth Ezekiel Sunardibuana    [ 2501999854 ]
 
 ## Template
 Admin Bootstrap : https://startbootstrap.com/theme/sb-admin-2
